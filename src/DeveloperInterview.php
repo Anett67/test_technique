@@ -20,7 +20,21 @@ class DeveloperInterview
     {
         $fizzBuzz = '';
 
-        // Write your code!
+        for ($i = 1; $i <= 100; $i++) {
+            if ($i % 3 === 0 && $i % 5 === 0) {
+                $fizzBuzz .= 'FizzBuzz';
+                continue;
+            }
+            if ($i % 3 === 0) {
+                $fizzBuzz .= 'Fizz';
+                continue;
+            }
+            if ($i % 5 === 0) {
+                $fizzBuzz .= 'Buzz';
+                continue;
+            }
+            $fizzBuzz .= $i;
+        }
 
         return $fizzBuzz;
     }
@@ -48,7 +62,72 @@ class DeveloperInterview
     {
         $roman = '';
 
-        // Write your code!
+        $thousands = $value - $value % 1000;
+        $hundreds = ($value - $thousands - (($value - $thousands) % 100));
+        $tenths = ($value - $thousands - $hundreds) - (($value - $thousands - $hundreds) % 10);
+        $digit = $value - $thousands - $hundreds - $tenths;
+
+        $roman .= str_repeat('M', (int)floor($value / 1000));
+
+        if($hundreds){
+            switch ($hundreds){
+                case $hundreds <= 300:
+                    $roman .= str_repeat('C', $hundreds / 100);
+                    break;
+                case $hundreds === 400:
+                    $roman .= 'CD';
+                    break;
+                case $hundreds === 500:
+                    $roman .= 'D';
+                    break;
+                case $hundreds > 500 && $hundreds <= 800:
+                    $roman .= 'D' . str_repeat('C', ($hundreds - 500) / 100);
+                    break;
+                case $hundreds === 900:
+                    $roman .= 'CM';
+                    break;
+            }
+        }
+
+        if($tenths){
+            switch ($tenths){
+                case $tenths <= 30:
+                    $roman .= str_repeat('X', $tenths / 10);
+                    break;
+                case $tenths === 40:
+                    $roman .= 'XL';
+                    break;
+                case $tenths === 50:
+                    $roman .= 'L';
+                    break;
+                case $tenths > 50 && $tenths <= 80:
+                    $roman .= 'L' . str_repeat('X', ($tenths - 50) / 10);
+                    break;
+                case $tenths === 90:
+                    $roman .= 'CX';
+                    break;
+            }
+        }
+
+        if($digit){
+            switch ($digit){
+                case $digit <= 3:
+                    $roman .= str_repeat('I', $tenths);
+                    break;
+                case $digit === 4:
+                    $roman .= 'IV';
+                    break;
+                case $digit === 5:
+                    $roman .= 'V';
+                    break;
+                case $digit > 5 && $digit <= 8:
+                    $roman .= 'V' . str_repeat('I', $digit - 5);
+                    break;
+                case $digit === 9:
+                    $roman .= 'IX';
+                    break;
+            }
+        }
 
         return $roman;
     }
@@ -71,7 +150,18 @@ class DeveloperInterview
     {
         $rot13 = '';
 
-        // Write your code!
+        $alphabet_uppercase = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+        for ($i = 0; $i < strlen($value); $i++){
+
+            if(in_array(strtoupper($value[$i]), $alphabet_uppercase)){
+
+                $value[$i] = ctype_upper($value[$i]) ? $alphabet_uppercase[(array_search($value[$i], $alphabet_uppercase) + 13) % 26] : strtolower($alphabet_uppercase[(array_search(strtoupper($value[$i]), $alphabet_uppercase) + 13) % 26]);
+
+            }
+
+            $rot13 .= $value[$i];
+        }
 
         return $rot13;
     }
@@ -87,9 +177,11 @@ class DeveloperInterview
         $text = 'Rapport n°2187 (09/2019) - Achats';
         $year = '';
 
-        // Write your code!
+        if(preg_match('/\/[0-9]{4}\)/', $text, $matches)){
+            $year = $matches[0];
+        }
 
-        return $year;
+        return substr($year,1, 4);
     }
 
     public function doSomething()
@@ -103,11 +195,10 @@ class DeveloperInterview
      */
     public function simplifyMe($report, $rc)
     {
-        if ($report === '' && $rc === 1) {
-            // pass
-        } else {
+        if ($report !== '' || $rc !== 1) {
             $this->doSomething();
         }
+
     }
 
     /**
@@ -119,9 +210,13 @@ class DeveloperInterview
      */
     public static function factorial(int $number): int
     {
-        $factorial = 0;
+        $factorial = 1;
 
-        // Write your code!
+        for($i = 1; $i <= $number; $i++){
+
+            $factorial *= $i;
+
+        }
 
         return $factorial;
     }
@@ -136,10 +231,7 @@ class DeveloperInterview
      */
     public static function clockAngle(int $hours, int $minutes): int
     {
-        $angle = 0;
 
-        // Write your code!
-
-        return $angle;
+        return (int)abs((0.5 * ($hours * 60 + $minutes)) - (6 * $minutes));
     }
 }
