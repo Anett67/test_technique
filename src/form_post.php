@@ -21,7 +21,7 @@ $success = $req->execute(array(
     1
 ));
 
-$response = $success ? 'La modification a bien été effectué' : 'Une erreur technique est survenue';
+$response = $success ? 'La modification a bien été effectuée' : 'Une erreur technique est survenue';
 
 header("Location: ../index.php?response=" . $response);
 
