@@ -14,22 +14,9 @@ class M_house
         }
     }
 
-    /**
-     * @param $type
-     */
-    public function getHouseQuantity($type)
+    public function getHouseQuantity()
     {
-        $req = $this->bdd->prepare('  
-           SELECT *
-            FROM house
-            WHERE house_type = :house_type 
-        ');
-
-        $req->bindValue(':house_type', $type, PDO::PARAM_STR);
-        $req->execute();
-        $data = $req->fetchObject();
-
-        return $data->quantity;
+        return $this->bdd->query('SELECT * from house')->fetchObject();
     }
 
 }

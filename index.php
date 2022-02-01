@@ -7,8 +7,7 @@ $house1 = new MyHouse1();
 $house2 = new MyHouse2();
 $requests = new M_house();
 
-$house1_quantity = $requests->getHouseQuantity('MyHouse1');
-$house2_quantity = $requests->getHouseQuantity('MyHouse2');
+$house_quantities = $requests->getHouseQuantity();
 
 ?>
 <!doctype html>
@@ -29,31 +28,33 @@ $house2_quantity = $requests->getHouseQuantity('MyHouse2');
 <body>
 <div class="container mt-5">
 
-    <form action="" method="post" class="w-50" id="house-form">
+    <div class="mb-3"><?php echo $_GET['response'] ?? ''; ?></div>
+
+    <form action="src/form_post.php" method="post" class="w-50" id="house-form">
         <div class="form-group">
             <label for="maison1">Maisons bleues</label>
             <input type="number" class="form-control" name="house1" id="maison1" aria-describedby="emailHelp"
-                   placeholder="Maison 1" value="<?php echo $house1_quantity; ?>">
+                   placeholder="Maison 1" value="<?php echo $house_quantities->house_1_quantity; ?>">
         </div>
         <div class="form-group">
             <label for="maison2">Maisons vertes</label>
-            <input type="number" class="form-control" name="house2" id="maison2" placeholder="Maison 2" value="<?php echo $house2_quantity; ?>">
+            <input type="number" class="form-control" name="house2" id="maison2" placeholder="Maison 2" value="<?php echo $house_quantities->house_2_quantity; ?>">
         </div>
         <button type="submit" class="btn btn-primary mt-2">Valider</button>
     </form>
 
     <div class="mt-4">
-        <div class="d-flex">
+        <div class="d-flex flex-wrap">
             <?php
-                for ($i = 0; $i < $house1_quantity; $i++){
+                for ($i = 0; $i < $house_quantities->house_1_quantity; $i++){
                     $house1->generate();
                 }
             ?>
         </div>
 
-        <div class="d-flex">
+        <div class="d-flex flex-wrap">
             <?php
-                for ($i = 0; $i < $house2_quantity; $i++) {
+                for ($i = 0; $i < $house_quantities->house_2_quantity; $i++) {
                     $house2->generate();
                 }
             ?>
