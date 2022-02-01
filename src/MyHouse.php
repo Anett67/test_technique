@@ -7,8 +7,8 @@ abstract class MyHouse
 
     protected function generate()
     {
-        echo "<div class=" . $this->color . " style='font-size: " . $this->size . "'>
-                <i class='fas fa-home'></i>
+        echo "<div class='" . $this->color . "' style='font-size: " . $this->size . "'>
+                <i class='house fas fa-home'></i>
             </div>";
     }
 }

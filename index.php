@@ -24,7 +24,7 @@ $house2 = new MyHouse2();
 <body>
     <div class="container mt-5">
 
-        <form class="w-50" id="house-form">
+        <form action="" method="post" class="w-50" id="house-form">
             <div class="form-group">
                 <label for="maison1">Nombre de Maison type 1</label>
                 <input type="number" class="form-control" id="maison1" aria-describedby="emailHelp" placeholder="Maison 1">
@@ -43,6 +43,8 @@ $house2 = new MyHouse2();
             <h2>Maison type 2</h2>
             <?php $house2->generate(); ?>
         </div>
+
+        <button id="btn-red" class="btn btn-danger mt-3">Maisons rouges</button>
     </div>
 
 <script src="assets/script.js"></script>
